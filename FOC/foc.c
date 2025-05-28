@@ -149,10 +149,25 @@ void commutate(ControllerStruct *controller, float theta)
     
 void torque_control(ControllerStruct *controller)
 {
+    // --- BEGIN ADDED CODE for position limiting ---
+    // Calculate absolute mechanical position limits based on M_OFFSET and user-defined THETA_MIN/THETA_MAX
+    // M_OFFSET (__float_reg[1]): The calibrated zero position.
+    // THETA_MIN (__float_reg[4]): Minimum travel from M_OFFSET (typically 0.0 for 0-60 range).
+    // THETA_MAX (__float_reg[5]): Maximum travel from M_OFFSET (e.g., 60 degrees in radians).
+    float absolute_theta_min = __float_reg[1] + __float_reg[4]; 
+    float absolute_theta_max = __float_reg[1] + __float_reg[5];
+
+    // Clamp the desired position (p_des) to ensure it stays within the defined absolute limits.
+    // This prevents the controller from targeting positions outside the allowed operational range.
+    controller->p_des = fmaxf(absolute_theta_min, controller->p_des);
+    controller->p_des = fminf(absolute_theta_max, controller->p_des);
+    // --- END ADDED CODE for position limiting ---
+
+    // Original torque calculation using the (now clamped) p_des
     float torque_ref = controller->kp*(controller->p_des - controller->theta_mech) + 
                         controller->t_ff + 
                         controller->kd*(controller->v_des - controller->dtheta_mech);
     
     controller->i_q_ref = torque_ref/KT_OUT;    
-    controller->i_d_ref = 0.0f;
+    controller->i_d_ref = 0.0f; // Assuming i_d_ref is always zero for this controller type
 }
