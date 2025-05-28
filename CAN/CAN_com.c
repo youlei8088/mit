@@ -60,6 +60,20 @@ void unpack_cmd(CANMessage msg, ControllerStruct * controller)
     int t_int = ((msg.data[6]&0xF)<<8)|msg.data[7];
 
     controller->p_des = uint_to_float(p_int, P_MIN, P_MAX, 16);
+    // Apply position limits based on M_OFFSET, THETA_MIN, and THETA_MAX
+    // M_OFFSET = __float_reg[1] (Mechanical zero offset)
+    // THETA_MIN = __float_reg[4] (Min deviation from M_OFFSET, e.g., -0.523 rad for -30 deg)
+    // THETA_MAX = __float_reg[5] (Max deviation from M_OFFSET, e.g., +0.523 rad for +30 deg)
+    
+    // Ensure __float_reg is accessible here. It's a global extern defined via user_config.h
+    float lower_limit = __float_reg[1] + __float_reg[4]; // M_OFFSET + THETA_MIN
+    float upper_limit = __float_reg[1] + __float_reg[5]; // M_OFFSET + THETA_MAX
+    
+    if (controller->p_des < lower_limit) {
+        controller->p_des = lower_limit;
+    } else if (controller->p_des > upper_limit) {
+        controller->p_des = upper_limit;
+    }
     controller->v_des = uint_to_float(v_int, V_MIN, V_MAX, 12);
     controller->kp = uint_to_float(kp_int, KP_MIN, KP_MAX, 12);
     controller->kd = uint_to_float(kd_int, KD_MIN, KD_MAX, 12);
