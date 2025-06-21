@@ -467,7 +467,7 @@ int main()
     // THETA_MAX is __float_reg[5] (user_config.h)
     const float pi_f = 3.141592653589793f; 
     const float limit_degrees = 60.0f; // +/- 60 degrees
-    const float limit_radians = limit_degrees * pi_f / 180.0f;
+    const float limit_radians = limit_degrees * pi_f / 180.0f; // Ensure pi_f is used here
 
     __float_reg[4] = -limit_radians;               // THETA_MIN set to -60 degrees in radians (relative to M_OFFSET)
     __float_reg[5] = limit_radians;                // THETA_MAX set to +60 degrees in radians (relative to M_OFFSET)
