@@ -461,16 +461,16 @@ int main()
     if(isnan(I_BW) || I_BW==-1)                 {I_BW = 1000;}
     if(isnan(I_MAX) || I_MAX ==-1)              {I_MAX = 40;}
     if(isnan(I_FW_MAX) || I_FW_MAX ==-1)        {I_FW_MAX = 0;}
-    // Set fixed 0 to 60-degree position limits.
+    // Set fixed -60 to +60 degree position limits (120 degree total range).
     // These values define the permissible range starting from M_OFFSET.
     // THETA_MIN is __float_reg[4] (user_config.h)
     // THETA_MAX is __float_reg[5] (user_config.h)
     const float pi_f = 3.141592653589793f; 
-    const float upper_limit_degrees = 60.0f;
-    const float upper_limit_radians = upper_limit_degrees * pi_f / 180.0f;
+    const float limit_degrees = 60.0f; // +/- 60 degrees
+    const float limit_radians = limit_degrees * pi_f / 180.0f;
 
-    __float_reg[4] = 0.0f;                         // THETA_MIN set to 0.0 (relative to M_OFFSET)
-    __float_reg[5] = upper_limit_radians;          // THETA_MAX set to +60 degrees in radians (relative to M_OFFSET)
+    __float_reg[4] = -limit_radians;               // THETA_MIN set to -60 degrees in radians (relative to M_OFFSET)
+    __float_reg[5] = limit_radians;                // THETA_MAX set to +60 degrees in radians (relative to M_OFFSET)
     if(isnan(CAN_ID) || CAN_ID==-1)             {CAN_ID = 1;}
     if(isnan(CAN_MASTER) || CAN_MASTER==-1)     {CAN_MASTER = 0;}
     if(isnan(CAN_TIMEOUT) || CAN_TIMEOUT==-1)   {CAN_TIMEOUT = 0;}
