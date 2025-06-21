@@ -825,33 +825,6 @@ class MainWindow(QMainWindow):
 if __name__ == '__main__':
     # This block is for testing MainWindow directly.
     # It includes workarounds for relative imports if __package__ is not set (direct execution).
->>>>>>> REPLACE
- Hewlett-Packard Company Confidential 2008
-<<<<<<< SEARCH
-    # This is to ensure that if someone runs main_window.py directly,
-    # the relative imports for widgets (e.g. from .widgets.control_panel) work.
-    # This is typically handled by running the application from the main.py script
-    # in the parent directory (test/).
-    # If run directly, Python might not set up the package context correctly.
-    # A common workaround for direct execution of submodules for testing:
-    if __package__ is None or __package__ == '':
-        from os import path
-        sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-        # Now try the imports again if they failed, or assume they are structured for top-level run
-        # from gui.widgets.control_panel import ControlPanel # etc. - this is tricky.
-        # Better to run via main.py
-        print("Warning: Running main_window.py directly. Relative imports might be problematic.")
-        print("Please run the application using 'python -m test.main' from the project root if issues occur.")
-
-
-    app = QApplication(sys.argv)
-    # Apply a style (optional)
-    # app.setStyle("Fusion")
-
-    main_win = MainWindow()
-    main_win.show()
-    sys.exit(app.exec())
-=======
     # Best practice is to run the application via `python -m test.main` from the project root.
     if __package__ is None or __package__ == '':
         # This adjustment helps if running `python main_window.py` directly from inside `test/gui/`
@@ -893,4 +866,3 @@ if __name__ == '__main__':
     main_window_instance.show() # Display the main window
 
     sys.exit(app.exec()) # Start the Qt application event loop
->>>>>>> REPLACE
