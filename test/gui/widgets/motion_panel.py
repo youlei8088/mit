@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSlider,
                              QSpinBox, QPushButton, QGroupBox, QDoubleSpinBox, QLCDNumber)
 from PyQt6.QtCore import Qt, pyqtSignal
-from ...utils import constants as const # Using relative import
+from test.utils import constants as const # Using absolute import from 'test'
 import numpy as np
 
 class MotionPanel(QWidget):

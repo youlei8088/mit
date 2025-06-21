@@ -6,19 +6,19 @@ from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
 from PyQt6.QtCore import Qt, QThread, pyqtSignal, QTimer, QSettings
 
 # --- Import GUI Widgets ---
-from .widgets.control_panel import ControlPanel
-from .widgets.motion_panel import MotionPanel
-from .widgets.param_panel import ParamPanel
-from .widgets.display_panel import DisplayPanel
+from test.gui.widgets.control_panel import ControlPanel
+from test.gui.widgets.motion_panel import MotionPanel
+from test.gui.widgets.param_panel import ParamPanel
+from test.gui.widgets.display_panel import DisplayPanel
 
 # --- Import Communication Handlers ---
-from ..serial_communication.serial_handler import SerialHandler
-from ..can_communication.can_handler import CANHandler
-# from ..can_communication.message_packer import MessagePacker # Not directly used in MW, but by CANHandler
+from test.serial_communication.serial_handler import SerialHandler
+from test.can_communication.can_handler import CANHandler
+# from test.can_communication.message_packer import MessagePacker # Not directly used in MW, but by CANHandler
 
 # --- Import Utilities ---
-from ..utils import constants as const
-from ..utils.logger import GUILogger
+from test.utils import constants as const
+from test.utils.logger import GUILogger
 
 
 class CANCommunicationThread(QThread):

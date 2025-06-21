@@ -3,7 +3,7 @@ import os
 import time # For sleep in test __main__
 import platform # For checking OS type if needed for DLL paths
 import sys # For PyInstaller _MEIPASS check
-from .message_packer import MessagePacker
+from test.can_communication.message_packer import MessagePacker
 
 # --- Constants for ControlCAN.dll ---
 # These values are typically found in the ControlCAN.h header file provided with the DLL.
