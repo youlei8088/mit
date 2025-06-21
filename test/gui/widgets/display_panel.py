@@ -4,7 +4,7 @@ from PyQt6.QtGui import QPainter, QColor, QPen, QBrush, QPolygonF, QFont
 from PyQt6.QtCore import Qt, QPointF, pyqtSignal, QRectF
 import pyqtgraph as pg
 import numpy as np
-from ...utils import constants as const # Using relative import
+from test.utils import constants as const # Using absolute import from 'test'
 
 class JointDiagramWidget(QWidget):
     """

@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QDial,
                              QDoubleSpinBox, QGroupBox, QGridLayout, QPushButton)
 from PyQt6.QtCore import Qt, pyqtSignal
-from ...utils import constants as const # Using relative import
+from test.utils import constants as const # Using absolute import from 'test'
 
 class ParamPanel(QWidget):
     """
@@ -207,7 +207,6 @@ if __name__ == '__main__':
     import sys
     from PyQt6.QtWidgets import QApplication
 
-    app = QApplication(sys.argv)
     app = QApplication(sys.argv)
 
     # Create and show the ParamPanel instance for testing
