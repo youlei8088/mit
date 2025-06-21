@@ -458,7 +458,7 @@ int main()
     prefs.load();                                                       // Read flash
     if(isnan(E_OFFSET))                         {E_OFFSET = 0.0f;}
     if(isnan(M_OFFSET))                         {M_OFFSET = 0.0f;}
-    if(isnan(I_BW) || I_BW==-1)                 {I_BW = 1000;}
+    if(isnan(I_BW) || I_BW==-1)                 {I_BW = 500;} // Lowered default I_BW for more conservative start
     if(isnan(I_MAX) || I_MAX ==-1)              {I_MAX = 40;}
     if(isnan(I_FW_MAX) || I_FW_MAX ==-1)        {I_FW_MAX = 0;}
     // Set fixed -60 to +60 degree position limits (120 degree total range).
